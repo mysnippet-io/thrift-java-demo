@@ -29,7 +29,16 @@ public class JavaClient {
     try {
       TTransport transport;
       if (args[0].contains("simple")) {
-        transport = new TSocket("localhost", 9090);
+        // transport = new TSocket("localhost", 9090);
+
+        // ---
+        TSocket socket = new TSocket("localhost", 9090);
+        socket.setConnectTimeout(5);
+        socket.setSocketTimeout(5);
+        ;
+        transport = socket;
+        // ---
+
         transport.open();
       } else {
         /*
